@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Flashcard.css";
 
-function Flashcard({ card }) {
-  const [flipped, setFlipped] = useState(false);
-
+function Flashcard({ card, flipped, setFlipped }) {
   return (
     <div className="flashcard-container" onClick={() => setFlipped(!flipped)}>
       <div className={`flashcard ${flipped ? "flipped" : ""}`}>

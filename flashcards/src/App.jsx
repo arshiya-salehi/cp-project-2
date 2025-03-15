@@ -12,22 +12,46 @@ const flashcards = [
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [userInput, setUserInput] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [flipped, setFlipped] = useState(false);
 
-  const showRandomCard = () => {
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * flashcards.length);
-    } while (newIndex === currentIndex);
-    setCurrentIndex(newIndex);
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+    resetInput();
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length);
+    resetInput();
+  };
+
+  const handleSubmit = () => {
+    const correctAnswer = flashcards[currentIndex].answer.toLowerCase().trim();
+    const userAnswer = userInput.toLowerCase().trim();
+    setFeedback(userAnswer === correctAnswer ? "✅ Correct!" : "❌ Incorrect!");
+  };
+
+  const resetInput = () => {
+    setUserInput("");
+    setFeedback("");
   };
 
   return (
     <div className="app">
-      <h1>The Ultimate Plant Parent!</h1>
-      <p>Test your plant knowledge with these flashcards!</p>
-      <p>Number of cards: {flashcards.length}</p>
-      <Flashcard card={flashcards[currentIndex]} />
-      <button onClick={showRandomCard}>Next Card</button>
+      <h1>Flashcard Quiz</h1>
+      <p>Test your knowledge with these flashcards!</p>
+      <Flashcard card={flashcards[currentIndex]} flipped={flipped} setFlipped={setFlipped} />
+      <input
+        type="text"
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder="Enter your answer"
+      />
+      <button onClick={handleSubmit}>Submit</button>
+      <p className="feedback">{feedback}</p>
+      <button onClick={handlePrev}>Back</button>
+      <button onClick={handleNext}>Next</button>
     </div>
   );
 }

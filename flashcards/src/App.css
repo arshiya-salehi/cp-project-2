@@ -17,26 +17,21 @@ p {
   color: #34495e;
 }
 
-.flashcard {
-  width: 300px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.feedback {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.flashcard.flipped {
-  background-color: #a3d9a5;
-  transform: rotateY(180deg);
+input {
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 button {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 10px 20px;
   border: none;
   background-color: #4caf50;
